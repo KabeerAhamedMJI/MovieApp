@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addReview } from '../app/features/reviews/reviewSlice';
 
 export async function loader({ params }) {
-    const response = await axios.get(`https://movie-backend-mc30.onrender.com/movies/${params.movieId}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/movies/${params.movieId}`);
     const movie = response.data;
 
     const verifyResponse = await axios.get('https://movie-backend-mc30.onrender.com/auth/verify', { withCredentials: true })
@@ -26,7 +26,7 @@ function Movie() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        axios.get(`https://movie-backend-mc30.onrender.com/reviews?movieId=${movie._id}`)
+        axios.get(`${import.meta.env.VITE_API_BASE_URL}/reviews?movieId=${movie._id}`)
             .then(response => {
                 dispatch(addReview(response.data))
             })
