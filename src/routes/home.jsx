@@ -4,7 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 import MovieCard from '../Components/MovieCard';
 
 export async function loader() {
-    const response = await axios.get(`https://movie-backend-mc30.onrender.com/movies`);
+    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/movies`);
     const movies = response.data;
     return { movies };
 }
