@@ -12,7 +12,7 @@ export default function SignUpForm() {
 
 
     const onSubmit = (data) => {
-        axios.post(`https://movie-backend-mc30.onrender.com/users`, data)
+        axios.post(`${import.meta.env.VITE_API_BASE_URL}/users`, data)
         .then(() => console.log(data))
     .catch(error => console.log(error))
         
