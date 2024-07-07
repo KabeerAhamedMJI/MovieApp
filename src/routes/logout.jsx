@@ -8,7 +8,7 @@ function Logout(props) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     useEffect (() =>{
-        axios.get('${import.meta.env.VITE_API_BASE_URL}/auth/logout', {withCredentials: true})
+        axios.get('https://movie-backend-mc30.onrender.com/auth/logout', {withCredentials: true})
         .then(res=>{
             dispatch(changeLoginStatus(false))
             navigate ('/login');
