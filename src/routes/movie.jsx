@@ -8,17 +8,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addReview } from '../app/features/reviews/reviewSlice';
 
 export async function loader({ params }) {
-    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/movies/${params.movieId}`);
-    const movie = response.data;
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/movies/${params.movieId}`);
+        const movie = response.data;
 
-    const verifyResponse = await axios.get('https://movie-backend-mc30.onrender.com/auth/verify', { withCredentials: true })
+        const verifyResponse = await axios.get('https://movie-backend-mc30.onrender.com/auth/verify', { withCredentials: true })
+        const loginStatus = verifyResponse.data.verified
 
-    const loginStatus = verifyResponse.data.verified
-
-    return { movie, loginStatus };
+        return { movie, loginStatus };
+    } catch (error) {
+        console.error("Error loading data:", error);
+        throw error;
+    }
 }
+
 function Movie() {
-    // const [reviews, setReviews] = useState([]);
     const { movie } = useLoaderData();
     const navigate = useNavigate();
     const loggedIn = useSelector(state => state.login.loggedIn)
@@ -26,11 +30,15 @@ function Movie() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_BASE_URL}/reviews?movieId=${movie._id}`)
-            .then(response => {
-                dispatch(addReview(response.data))
-            })
-            .catch(error => console.log(error))
+        const fetchReviews = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/reviews?movieId=${movie._id}`);
+                dispatch(addReview(response.data));
+            } catch (error) {
+                console.error("Error fetching reviews:", error);
+            }
+        };
+        fetchReviews();
     }, [movie._id]);
 
     return (
@@ -58,7 +66,6 @@ function Movie() {
                     ))}
                 </div>
             </section>
-
         </main>
     );
 }
