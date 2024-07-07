@@ -1,4 +1,5 @@
 import React from 'react';
+import TheaterImage from '../img/Theater.jpg';
 
 function About(props) {
     return (
