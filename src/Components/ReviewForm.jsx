@@ -18,7 +18,7 @@ export default function ReviewForm(props) {
             movie: props.movieId,
             user: props.userName
         }
-        axios.post('${import.meta.env.VITE_API_BASE_URL}/reviews', payload, { withCredentials: true })
+        axios.post('https://movie-backend-mc30.onrender.com/reviews', payload, { withCredentials: true })
             .then(response => dispatch(addOneReview(response.data)))
             .catch(error => console.log(error));
     };
