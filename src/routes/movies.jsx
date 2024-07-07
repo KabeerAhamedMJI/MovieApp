@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Actor(props) {
+function Movies(props) {
     return(
         <div>
 
         </div>
     );
 }
-export default Actor;
+export default Movies;
