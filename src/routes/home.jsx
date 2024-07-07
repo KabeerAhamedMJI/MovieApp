@@ -4,9 +4,14 @@ import { useLoaderData } from 'react-router-dom';
 import MovieCard from '../Components/MovieCard';
 
 export async function loader() {
-    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/movies`);
-    const movies = response.data;
-    return { movies };
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/movies`);
+        const movies = response.data;
+        return { movies };
+    } catch (error) {
+        console.error('Error fetching movies:', error);
+        return { movies: [] }; // or handle error state as needed
+    }
 }
 
 function Home(props) {
