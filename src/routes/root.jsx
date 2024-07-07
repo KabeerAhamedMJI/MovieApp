@@ -10,7 +10,7 @@ function Root(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        axios.get('${import.meta.env.VITE_API_BASE_URL}/auth/verify', { withCredentials: true })
+        axios.get('https://movie-backend-mc30.onrender.com/auth/verify', { withCredentials: true })
             .then(response => {
                 const loginStatus = response.data.verified;
                 dispatch(changeLoginStatus(loginStatus));
