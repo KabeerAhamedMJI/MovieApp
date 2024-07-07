@@ -7,7 +7,7 @@ function About(props) {
             <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">About MovieSpot</h1>
             <div className="flex flex-col md:flex-row items-center md:items-center">
                 <div className="md:w-1/2 mb-6 md:mb-0 md:mr-6 flex justify-center">
-                    <img className="w-full h-auto object-cover rounded-lg shadow-lg md:max-w-md" src="./img/Theater.jpg" alt="Theater" />
+                    <img className="w-full h-auto object-cover rounded-lg shadow-lg md:max-w-md" src={TheaterImage} alt="Theater" />
                 </div>
                 <div className="md:w-1/2 space-y-4">
                     <p className="text-lg text-gray-700 leading-relaxed">
