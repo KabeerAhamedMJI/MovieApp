@@ -14,7 +14,7 @@ export default function LoginForm() {
     } = useForm();
 
     const onSubmit = (data) => {
-        axios.post('${import.meta.env.VITE_API_BASE_URL}/auth/login', data, { withCredentials: true })
+        axios.post('https://movie-backend-mc30.onrender.com/auth/login', data, { withCredentials: true })
             .then(response => {
                 dispatch(changeLoginStatus(true));
                 navigate('/');
